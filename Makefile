@@ -22,7 +22,7 @@ os-image: $(BOOTLOADER_BIN) $(KERNEL_BIN)
 
 iso: os-image
 	mkdir -p iso/boot/grub
-	cp grub.cfg iso/boot/grub/
+	cp iso/boot/grub/grub.cfg iso/boot/grub/
 	grub-mkrescue -o DolphinOS.iso iso
 
 clean:
