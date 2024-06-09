@@ -1,0 +1,32 @@
+name: Build DolphinOS
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: sudo apt-get install -y gcc-multilib binutils nasm grub-pc-bin xorriso
+
+    - name: Build project
+      run: make
+
+    - name: Create ISO
+      run: make iso
+
+    - name: Upload ISO
+      uses: actions/upload-artifact@v2
+      with:
+        name: DolphinOS-iso
+        path: DolphinOS.iso
